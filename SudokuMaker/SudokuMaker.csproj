@@ -55,9 +55,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Board.cs" />
+    <Compile Include="CellGrid.cs" />
+    <Compile Include="CellVector.cs" />
     <Compile Include="Cell.cs" />
-    <Compile Include="Column.cs" />
-    <Compile Include="Row.cs" />
     <Compile Include="Sudoku.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>

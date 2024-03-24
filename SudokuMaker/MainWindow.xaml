@@ -15,18 +15,17 @@
 
         <DataTemplate x:Key="DataTemplate_Level1">
             <Border BorderBrush="Black" BorderThickness="0,0,1,0">
-            <ItemsControl ItemsSource="{Binding}" ItemTemplate="{DynamicResource DataTemplate_Level2}">
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <UniformGrid Rows="1" Width="360" Height="40"/>
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-            </ItemsControl>
+                <ItemsControl ItemsSource="{Binding}" ItemTemplate="{DynamicResource DataTemplate_Level2}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <UniformGrid Rows="1" Width="360" Height="40"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                </ItemsControl>
             </Border>
         </DataTemplate>
-
     </Window.Resources>
-
+    <!--Don't ask about the borders, just go with it-->
     <Grid>
         <Border BorderBrush="Black" BorderThickness="0,1,0,0" Width="360">
             <ItemsControl ItemsSource="{Binding BoardList}" ItemTemplate="{DynamicResource DataTemplate_Level1}"/>
