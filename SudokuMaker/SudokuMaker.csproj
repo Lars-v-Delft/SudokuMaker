@@ -56,6 +56,8 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Board.cs" />
+    <Compile Include="CellView.cs" />
+    <Compile Include="CellBorderConverter.cs" />
     <Compile Include="CellGrid.cs" />
     <Compile Include="CellVector.cs" />
     <Compile Include="Cell.cs" />

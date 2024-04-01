@@ -65,16 +65,16 @@ namespace SudokuMaker
             return null;
         }
 
-        public List<List<int>> BoardList
+        public List<List<CellView>> BoardList
         {
             get
             {
-                List<List<int>> list = new List<List<int>>();
+                List<List<CellView>> list = new List<List<CellView>>();
                 for (int r = 0; r < Board.Size; r++)
                 {
-                    list.Add(new List<int>());
+                    list.Add(new List<CellView>());
                     for (int c = 0; c < Board.Size; c++)
-                        list[r].Add(board.Cells[r, c].Value);
+                        list[r].Add(new CellView(board.Cells[r, c].Value, r, c));
                 }
                 return list;
             }

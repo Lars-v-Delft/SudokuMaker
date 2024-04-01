@@ -7,28 +7,32 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Window.Resources>
+        <local:CellBorderConverter x:Key="CellBorder"/>
+
         <DataTemplate x:Key="DataTemplate_Level2">
-            <Border BorderBrush="Black" BorderThickness="1,0,0,1">
-            <TextBlock Text="{Binding}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20"/>
+            <Border BorderBrush="Black">
+                <Border.BorderThickness>
+                    <MultiBinding Converter="{StaticResource CellBorder}">
+                        <Binding Path="Y"/>
+                        <Binding Path="X"/>
+                    </MultiBinding>
+                </Border.BorderThickness>
+                <TextBlock Text="{Binding Value}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20"/>
             </Border>
         </DataTemplate>
 
         <DataTemplate x:Key="DataTemplate_Level1">
-            <Border BorderBrush="Black" BorderThickness="0,0,1,0">
-                <ItemsControl ItemsSource="{Binding}" ItemTemplate="{DynamicResource DataTemplate_Level2}">
-                    <ItemsControl.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <UniformGrid Rows="1" Width="360" Height="40"/>
-                        </ItemsPanelTemplate>
-                    </ItemsControl.ItemsPanel>
-                </ItemsControl>
-            </Border>
+            <ItemsControl ItemsSource="{Binding}" 
+                          ItemTemplate="{DynamicResource DataTemplate_Level2}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <UniformGrid Rows="1" Width="360" Height="40"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+            </ItemsControl>
         </DataTemplate>
     </Window.Resources>
-    <!--Don't ask about the borders, just go with it-->
     <Grid>
-        <Border BorderBrush="Black" BorderThickness="0,1,0,0" Width="360">
-            <ItemsControl ItemsSource="{Binding BoardList}" ItemTemplate="{DynamicResource DataTemplate_Level1}"/>
-        </Border>
+        <ItemsControl ItemsSource="{Binding BoardList}" ItemTemplate="{DynamicResource DataTemplate_Level1}"/>
     </Grid>
 </Window>
