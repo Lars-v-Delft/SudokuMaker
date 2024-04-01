@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace SudokuMaker
@@ -15,6 +16,11 @@ namespace SudokuMaker
 
         private void FillBoard()
         {
+            List<int> baseOptions = new List<int>();
+            for (int i = 1; i <= Board.Size; i++)
+                baseOptions.Add(i);
+            Random rnd = new Random();
+
             Cell emptyCell = getNextEmptyCell();
             int iteration = 0;
             List<Cell> lastSet = new List<Cell>(); // avoid loop where the same cells keep getting reset to the same values
@@ -22,14 +28,17 @@ namespace SudokuMaker
             {
                 // find the value which results in the least amount of invalid cells
                 KeyValuePair<int, List<Cell>> bestOption = new KeyValuePair<int, List<Cell>>();
-                for (int i = 1; i <= Board.Size; i++)
+                List<int> options = new List<int>(baseOptions);
+                while (options.Count > 0)
                 {
-                    emptyCell.Value = i;
+                    int currentOption = options[rnd.Next(options.Count)];
+                    options.Remove(currentOption);
+                    emptyCell.Value = currentOption;
                     List<Cell> invalidCells = board.InvalidCells; // todo: optimize to check only cells relevant to changed cell
                     if (invalidCells.Any(ic => lastSet.Contains(ic))) // avoids loop of resetting same cells
                         continue;
                     if (bestOption.Key == default || invalidCells.Count < bestOption.Value.Count)
-                        bestOption = new KeyValuePair<int, List<Cell>>(i, invalidCells);
+                        bestOption = new KeyValuePair<int, List<Cell>>(currentOption, invalidCells);
                     if (bestOption.Value.Count == 0) // optimization
                         break;
                 }
